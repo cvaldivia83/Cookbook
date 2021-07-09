@@ -1,9 +1,10 @@
 require_relative 'cookbook'
 require_relative 'recipe'
+require_relative 'view'
 
 class Controller
 
-  def initialize(cookbook, view)
+  def initialize(cookbook)
     @cookbook = cookbook
     @view = View.new
   end
@@ -14,19 +15,19 @@ class Controller
   end
 
   def create_recipe
-    #ask the user title and description of a recipe
+    # ask the user title and description of a recipe
     title = @view.ask_user_for_recipe_title
     description = @view.ask_user_for_recipe_description
-    #create a new instance of recipe
+    # create a new instance of recipe
     recipe = Recipe.new(title, description)
-    #add recipe to the repository (cookbook)
+    # add recipe to the repository (cookbook)
     @cookbook.add_recipe(recipe)
   end
 
   def destroy_recipe
-    #show a list of all recipes
+    # show a list of all recipes
     all
-    #ask user for recipe's index
+    # ask user for recipe's index
     index = @view.ask_user_for_index
     # delete index - 1 from instance of cookbook
     @cookbook.remove_recipe(index)

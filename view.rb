@@ -1,3 +1,5 @@
+require_relative 'cookbook'
+
 class View
 
   def ask_user_for_recipe_title
