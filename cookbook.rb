@@ -13,20 +13,20 @@ class Cookbook
   def load_csv(filepath)
     CSV.foreach(filepath) do |row|
       # Here, row is an array of columns
-      @recipes << Recipe.new(row[0], row[1])
+      @recipes << Recipe.new(row[0], row[1], row[2])
     end
   end
 
   def save_recipe
     CSV.open(@file_path, 'wb', @csv_options) do |csv|
       @recipes.each do |recipe|
-        csv << [recipe.name, recipe.description]
+        csv << [recipe.name, recipe.description, recipe.rating]
       end
     end
   end
 
   def all
-    return @recipes
+    @recipes
   end
 
   def add_recipe(recipe)
@@ -39,4 +39,7 @@ class Cookbook
     save_recipe
   end
 
+  def find_recipe(recipe_index)
+    @recipes.find_index(recipe_index)
+  end
 end

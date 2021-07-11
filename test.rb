@@ -10,7 +10,7 @@ require_relative 'controller'
 
 view = View.new
 repo = Cookbook.new('cookbook.csv')
-controller = Controller.new(repo, view)
+controller = Controller.new(repo)
 
 #Test scenarios
 
@@ -18,7 +18,7 @@ controller = Controller.new(repo, view)
 #controller.create_recipe
 
 #Print all recipes
-controller.all
+# controller.all
 
 # add one more recipe
 # controller.create_recipe
@@ -27,4 +27,9 @@ controller.all
 #controller.all
 
 #delete a recipe
-controller.destroy_recipe
+# controller.destroy_recipe
+
+# test searching for a recipe
+# controller.search_recipe
+
+controller.all

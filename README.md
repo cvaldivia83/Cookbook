@@ -12,5 +12,5 @@ The project uses the MVC pattern, also used in rails.
 
 The goal of this project is for us students to get familiarized with two important concepts in Software Architecture: **single responsibility principle** and **separation of concerns**.
 
-## Tecnologias utilizadas
-Project developed using Ruby.
+## 📝 Technologies Used
+Project developed using Ruby, Nokogiri and Open-uri  ruby gems.
