@@ -40,6 +40,6 @@ class Cookbook
   end
 
   def find_recipe(recipe_index)
-    @recipes.find_index(recipe_index)
+    @recipes[recipe_index]
   end
 end

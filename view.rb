@@ -20,16 +20,23 @@ class View
     gets.chomp
   end
 
+  def ask_user_for_prep_time
+    puts 'What is the preparation time for this recipe?'
+    print '> '
+    gets.chomp
+  end
+
   def ask_user_for_index
     puts 'Which recipe would you like to delete?'
     print '> '
     gets.chomp.to_i - 1
   end
 
-  def list_all_recipes(recipes, x)
+  def list_all_recipes(recipes)
     puts '-- Here are all your recipes --'
     recipes.each_with_index do |recipe, index|
-      puts "#{index + 1}. [x] #{recipe.name} - #{recipe.description} - #{recipe.rating}"
+      x = recipe.done? ? 'X' : ' '
+      puts "#{index + 1}. [#{x}] #{recipe.name} - #{recipe.description} - #{recipe.rating}"
     end
   end
 
@@ -52,6 +59,12 @@ class View
 
   def import_recipe
     puts 'Which recipe would you like to import? (Type the index)'
+    print '> '
+    gets.chomp.to_i - 1
+  end
+
+  def ask_user_for_recipe_index
+    puts 'Which recipe would you like to mark as done?'
     print '> '
     gets.chomp.to_i - 1
   end

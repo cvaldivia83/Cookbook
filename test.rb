@@ -33,3 +33,6 @@ controller = Controller.new(repo)
 # controller.search_recipe
 
 controller.all
+
+controller.mark_recipe_as_done
+controller.all

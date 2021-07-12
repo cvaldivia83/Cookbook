@@ -14,8 +14,7 @@ class Controller
 
   def all
     recipes = @cookbook.all
-    x = @done ? 'X' : ' '
-    @view.list_all_recipes(recipes, x)
+    @view.list_all_recipes(recipes)
   end
 
   def create_recipe
@@ -24,8 +23,10 @@ class Controller
     description = @view.ask_user_for_recipe_description
     # Ask user for a recipe rating
     rating = @view.ask_user_for_rating
+    # Ask user for prep time
+    prep_time = @view.ask_user_for_prep_time
     # create a new instance of recipe
-    recipe = Recipe.new(title, description, rating)
+    recipe = Recipe.new(title, description, rating, prep_time)
     # add recipe to the repository (cookbook)
     @cookbook.add_recipe(recipe)
   end
@@ -69,8 +70,9 @@ class Controller
     @cookbook.add_recipe(recipe)
   end
 
-  def mark_recipe_as_done(index)
-    index = @view.ask_user_for_index
-
+  def mark_recipe_as_done
+    recipe_index = @view.ask_user_for_recipe_index
+    recipe = @cookbook.find_recipe(recipe_index)
+    recipe.mark_as_done
   end
 end
