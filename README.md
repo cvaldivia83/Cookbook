@@ -1,6 +1,3 @@
-<h1 align="center">
-<img src="https://ik.imagekit.io/kifd4nz2wokt/cv_logo_QHxLsZ7Hb.png" width="100px" height="100px">
-</h1>
 
 ## 🏷 About
 
