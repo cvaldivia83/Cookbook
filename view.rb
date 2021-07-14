@@ -34,9 +34,13 @@ class View
 
   def list_all_recipes(recipes)
     puts '-- Here are all your recipes --'
+    puts ''
     recipes.each_with_index do |recipe, index|
       x = recipe.done? ? 'X' : ' '
-      puts "#{index + 1}. [#{x}] #{recipe.name} - #{recipe.description} - #{recipe.rating}"
+      puts "#{index + 1}. [#{x}] #{recipe.name} - #{recipe.description} - (#{recipe.rating} / 5) - Prep time: #{recipe.prep_time}"
+      puts ''
+      puts '--- * --- * --- * --- * --- * --- * --- * --- * --- * --- * --- * --- * --- *'
+      puts ''
     end
   end
 

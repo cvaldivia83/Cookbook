@@ -41,9 +41,11 @@ class Controller
   end
 
   def search_recipe
-    titles = []
-    descriptions = []
+    title = []
+    description = []
     ratings = []
+    href = []
+    prep_time = ''
     ingredient = @view.ask_user_for_ingredient
     @view.search_for_ingredient(ingredient)
 
@@ -51,22 +53,28 @@ class Controller
     html_file = URI.open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
-    html_doc.search('.card__title').each do |title|
-      titles << title.text.strip
+    html_doc.search('.card__detailsContainer').each do |element|
+      title << element.search('.card__title').first.text.strip
+      description << element.search('.card__summary').first.text.strip
+      ratings << element.search('.review-star-text').text.strip.slice(/(\d.?\d*)/)
+      href << element.search('.card__titleLink').first.attribute('href').value
     end
 
-    @view.list_ingredient_recipes(titles)
-
-    html_doc.search('.card__summary').each do |description|
-      descriptions << description.text.strip
-    end
-
-    html_doc.search('.review-star-text').each do |rating|
-      ratings << rating.text.strip.slice(/(\d.?\d*)/)
-    end
+    @view.list_ingredient_recipes(title)
 
     index = @view.import_recipe
-    recipe = Recipe.new(titles[index], descriptions[index], ratings[index])
+
+    new_url = href[index]
+    html = URI.open(new_url).read
+    new_doc = Nokogiri::HTML(html)
+
+    new_doc.search('.recipe-meta-item').each do |element|
+      if element.search('.recipe-meta-item-header').first.text.strip == 'total:'
+        prep_time = element.search('.recipe-meta-item-body').first.text.strip
+      end
+    end
+
+    recipe = Recipe.new(title[index], description[index], ratings[index], prep_time)
     @cookbook.add_recipe(recipe)
   end
 
